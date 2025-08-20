@@ -21,6 +21,8 @@ services:
         ENVIRONMENT: non-production
     image: keycloak-service:non-production
     container_name: keycloak-service
+    env_file:
+      - .env
     environment:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://keycloak-service-db:5432/keycloakservicedb
@@ -30,7 +32,6 @@ services:
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
       KC_HEALTH_ENABLED: true
       KC_METRICS_ENABLED: true
-      AUTH_GATEWAY_CLIENT_SECRET: local-development-secret
     ports:
       - "127.0.0.1:8090:8080"
     command: ["start-dev", "--import-realm"]
