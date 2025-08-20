@@ -17,6 +17,7 @@ services:
   keycloak-service:
     build:
       context: .
+      dockerfile: Dockerfile
       args:
         ENVIRONMENT: non-production
     image: keycloak-service:non-production
