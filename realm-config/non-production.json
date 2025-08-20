@@ -2,7 +2,7 @@
   "realm": "non-production",
   "enabled": true,
   "displayName": "Non-Production",
-  "displayNameHtml": "<div class=\"kc-logo-text\"><span>Beaver Non-Production</span></div>",
+  "displayNameHtml": "<div class=\"kc-logo-text\"><span>Non-Production</span></div>",
   "accessTokenLifespan": 3600,
   "refreshTokenMaxReuse": 0,
   "ssoSessionMaxLifespan": 36000,
