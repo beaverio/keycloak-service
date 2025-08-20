@@ -25,7 +25,7 @@
       "name": "auth-gateway",
       "enabled": true,
       "clientAuthenticatorType": "client-secret",
-      "secret": "REPLACE_WITH_NON_PRODUCTION_SECRET",
+      "secret": "${AUTH_GATEWAY_CLIENT_SECRET}",
       "standardFlowEnabled": true,
       "implicitFlowEnabled": false,
       "directAccessGrantsEnabled": false,
