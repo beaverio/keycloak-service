@@ -4,7 +4,7 @@ services:
     image: postgres:16
     container_name: keycloak-service-db
     environment:
-      POSTGRES_DB: keycloak_dev
+      POSTGRES_DB: keycloakservicedb
       POSTGRES_USER: keycloak_user
       POSTGRES_PASSWORD: keycloak_password
     ports:
@@ -18,16 +18,16 @@ services:
     build:
       context: .
       args:
-        ENVIRONMENT: non-prod
-    image: keycloak-service:non-prod
+        ENVIRONMENT: non-production
+    image: keycloak-service:non-production
     container_name: keycloak-service
     environment:
       KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://keycloak-service-db:5432/keycloak_dev
+      KC_DB_URL: jdbc:postgresql://keycloak-service-db:5432/keycloakservicedb
       KC_DB_USERNAME: keycloak_user
       KC_DB_PASSWORD: keycloak_password
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
       KC_HEALTH_ENABLED: true
       KC_METRICS_ENABLED: true
     ports:

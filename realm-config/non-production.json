@@ -1,8 +1,8 @@
 {
-  "realm": "non-prod",
+  "realm": "non-production",
   "enabled": true,
-  "displayName": "Beaver Non-Production",
-  "displayNameHtml": "<div class=\"kc-logo-text\"><span>Beaver Non-Prod</span></div>",
+  "displayName": "Non-Production",
+  "displayNameHtml": "<div class=\"kc-logo-text\"><span>Beaver Non-Production</span></div>",
   "accessTokenLifespan": 3600,
   "refreshTokenMaxReuse": 0,
   "ssoSessionMaxLifespan": 36000,
@@ -21,11 +21,11 @@
   "bruteForceProtected": true,
   "clients": [
     {
-      "clientId": "beaver-auth-gateway",
-      "name": "Beaver Auth Gateway",
+      "clientId": "auth-gateway",
+      "name": "auth-gateway",
       "enabled": true,
       "clientAuthenticatorType": "client-secret",
-      "secret": "non-prod-client-secret-change-in-prod",
+      "secret": "REPLACE_WITH_NON_PRODUCTION_SECRET",
       "standardFlowEnabled": true,
       "implicitFlowEnabled": false,
       "directAccessGrantsEnabled": false,
@@ -71,14 +71,14 @@
         "description": "Standard user role",
         "composite": false,
         "clientRole": false,
-        "containerId": "dev"
+        "containerId": "non-production"
       },
       {
         "name": "admin",
         "description": "Administrator role",
         "composite": false,
         "clientRole": false,
-        "containerId": "dev"
+        "containerId": "non-production"
       }
     ]
   },

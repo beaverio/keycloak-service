@@ -14,12 +14,12 @@ fi
 
 # Export realm using Keycloak admin CLI
 docker exec keycloak-service /opt/keycloak/bin/kc.sh export \
-    --realm non-prod \
+    --realm non-production \
     --file /tmp/exported-realm.json \
     --users realm_file
 
 # Copy exported file to host
-docker cp keycloak-service:/tmp/exported-realm.json ./realm-config/exported-non-prod-$(date +%Y%m%d-%H%M%S).json
+docker cp keycloak-service:/tmp/exported-realm.json ./realm-config/exported-$(date +%Y%m%d-%H%M%S).json
 
-echo "✅ Realm exported to ./realm-config/exported-non-prod-$(date +%Y%m%d-%H%M%S).json"
-echo "   Review the exported file and replace non-prod-realm.json if needed"
+echo "✅ Realm exported to ./realm-config/exported-$(date +%Y%m%d-%H%M%S).json"
+echo "   Review the exported file and replace non-production.json if needed"
