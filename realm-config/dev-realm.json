@@ -1,0 +1,115 @@
+{
+  "realm": "dev",
+  "enabled": true,
+  "displayName": "Beaver Development",
+  "displayNameHtml": "<div class=\"kc-logo-text\"><span>Beaver Dev</span></div>",
+  "accessTokenLifespan": 3600,
+  "refreshTokenMaxReuse": 0,
+  "ssoSessionMaxLifespan": 36000,
+  "offlineSessionMaxLifespan": 5184000,
+  "accessCodeLifespan": 60,
+  "accessCodeLifespanUserAction": 300,
+  "sslRequired": "none",
+  "registrationAllowed": false,
+  "registrationEmailAsUsername": true,
+  "rememberMe": true,
+  "verifyEmail": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": true,
+  "clients": [
+    {
+      "clientId": "beaver-auth-gateway",
+      "name": "Beaver Auth Gateway",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "dev-client-secret-change-in-prod",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "publicClient": false,
+      "frontchannelLogout": false,
+      "protocol": "openid-connect",
+      "rootUrl": "http://localhost:8080",
+      "adminUrl": "http://localhost:8080",
+      "baseUrl": "/",
+      "redirectUris": [
+        "http://localhost:8080/*",
+        "http://localhost:3000/*"
+      ],
+      "webOrigins": [
+        "http://localhost:8080",
+        "http://localhost:3000"
+      ],
+      "bearerOnly": false,
+      "consentRequired": false,
+      "defaultClientScopes": [
+        "web-origins",
+        "profile",
+        "roles",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access",
+        "microprofile-jwt"
+      ]
+    }
+  ],
+  "roles": {
+    "realm": [
+      {
+        "name": "user",
+        "description": "Standard user role",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "dev"
+      },
+      {
+        "name": "admin",
+        "description": "Administrator role",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "dev"
+      }
+    ]
+  },
+  "users": [
+    {
+      "username": "testuser",
+      "enabled": true,
+      "email": "test@beaver.dev",
+      "firstName": "Test",
+      "lastName": "User",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["user"],
+      "clientRoles": {}
+    },
+    {
+      "username": "admin",
+      "enabled": true,
+      "email": "admin@beaver.dev",
+      "firstName": "Admin",
+      "lastName": "User",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["admin", "user"],
+      "clientRoles": {}
+    }
+  ]
+}
