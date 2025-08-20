@@ -8,7 +8,7 @@ services:
       POSTGRES_USER: keycloak_user
       POSTGRES_PASSWORD: keycloak_password
     ports:
-      - "5433:5432"
+      - "5432:5432"
     volumes:
       - keycloak_db_data:/var/lib/postgresql/data
     networks:
@@ -34,7 +34,7 @@ services:
       KC_HEALTH_ENABLED: true
       KC_METRICS_ENABLED: true
     ports:
-      - "127.0.0.1:8090:8080"
+      - "127.0.0.1:8080:8080"
     command: ["start-dev", "--import-realm"]
     depends_on:
       - keycloak-service-db
