@@ -33,14 +33,14 @@
       "publicClient": false,
       "frontchannelLogout": false,
       "protocol": "openid-connect",
-      "rootUrl": "https://app.yourcompany.com",
-      "adminUrl": "https://app.yourcompany.com",
+      "rootUrl": "https://app.beaver.com",
+      "adminUrl": "https://app.beaver.com",
       "baseUrl": "/",
       "redirectUris": [
-        "https://app.yourcompany.com/*"
+        "https://app.beaver.com/*"
       ],
       "webOrigins": [
-        "https://app.yourcompany.com"
+        "https://app.beaver.com"
       ],
       "bearerOnly": false,
       "consentRequired": false,

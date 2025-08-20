@@ -18,8 +18,8 @@ services:
     build:
       context: .
       args:
-        ENVIRONMENT: dev
-    image: keycloak-service:dev
+        ENVIRONMENT: non-prod
+    image: keycloak-service:non-prod
     container_name: keycloak-service
     environment:
       KC_DB: postgres

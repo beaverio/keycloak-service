@@ -1,8 +1,8 @@
 {
-  "realm": "dev",
+  "realm": "non-prod",
   "enabled": true,
-  "displayName": "Beaver Development",
-  "displayNameHtml": "<div class=\"kc-logo-text\"><span>Beaver Dev</span></div>",
+  "displayName": "Beaver Non-Production",
+  "displayNameHtml": "<div class=\"kc-logo-text\"><span>Beaver Non-Prod</span></div>",
   "accessTokenLifespan": 3600,
   "refreshTokenMaxReuse": 0,
   "ssoSessionMaxLifespan": 36000,
@@ -25,7 +25,7 @@
       "name": "Beaver Auth Gateway",
       "enabled": true,
       "clientAuthenticatorType": "client-secret",
-      "secret": "dev-client-secret-change-in-prod",
+      "secret": "non-prod-client-secret-change-in-prod",
       "standardFlowEnabled": true,
       "implicitFlowEnabled": false,
       "directAccessGrantsEnabled": false,
@@ -38,11 +38,15 @@
       "baseUrl": "/",
       "redirectUris": [
         "http://localhost:8080/*",
-        "http://localhost:3000/*"
+        "http://localhost:3000/*",
+        "https://dev.beaver.com/*",
+        "https://staging.beaver.com/*"
       ],
       "webOrigins": [
         "http://localhost:8080",
-        "http://localhost:3000"
+        "http://localhost:3000",
+        "https://dev.beaver.com",
+        "https://staging.beaver.com"
       ],
       "bearerOnly": false,
       "consentRequired": false,
@@ -82,7 +86,7 @@
     {
       "username": "testuser",
       "enabled": true,
-      "email": "test@beaver.dev",
+      "email": "test@example.com",
       "firstName": "Test",
       "lastName": "User",
       "credentials": [
@@ -96,9 +100,9 @@
       "clientRoles": {}
     },
     {
-      "username": "admin",
+      "username": "testadmin",
       "enabled": true,
-      "email": "admin@beaver.dev",
+      "email": "admin@example.com",
       "firstName": "Admin",
       "lastName": "User",
       "credentials": [
