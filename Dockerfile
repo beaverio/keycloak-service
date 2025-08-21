@@ -1,10 +1,12 @@
-FROM quay.io/keycloak/keycloak:26.3.2
+FROM quay.io/keycloak/keycloak:latest
 
-# Accept build argument for environment
-ARG ENVIRONMENT=non-production
+# Configure for production mode - database must be set at build time
+ENV KC_DB=postgres
+ENV KC_HTTP_ENABLED=true
+ENV KC_HOSTNAME_STRICT=false
+ENV KC_HOSTNAME_STRICT_HTTPS=false
 
-# Copy only the environment-specific realm configuration
-COPY realm-config/${ENVIRONMENT}.json /opt/keycloak/data/import/
+# Build and optimize the server configuration with PostgreSQL
+RUN /opt/keycloak/bin/kc.sh build
 
-# Build optimizations for production
-RUN if [ "$ENVIRONMENT" = "production" ]; then /opt/keycloak/bin/kc.sh build; fi
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized"]
