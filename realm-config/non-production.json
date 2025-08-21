@@ -1,84 +1,28 @@
 {
   "realm": "non-production",
   "enabled": true,
-  "displayName": "Non-Production",
-  "displayNameHtml": "<div class=\"kc-logo-text\"><span>Non-Production</span></div>",
-  "accessTokenLifespan": 3600,
-  "refreshTokenMaxReuse": 0,
-  "ssoSessionMaxLifespan": 36000,
-  "offlineSessionMaxLifespan": 5184000,
-  "accessCodeLifespan": 60,
-  "accessCodeLifespanUserAction": 300,
-  "sslRequired": "none",
-  "registrationAllowed": false,
-  "registrationEmailAsUsername": true,
-  "rememberMe": true,
-  "verifyEmail": false,
-  "loginWithEmailAllowed": true,
-  "duplicateEmailsAllowed": false,
-  "resetPasswordAllowed": true,
-  "editUsernameAllowed": false,
-  "bruteForceProtected": true,
   "clients": [
     {
       "clientId": "auth-gateway",
-      "name": "auth-gateway",
-      "enabled": true,
-      "clientAuthenticatorType": "client-secret",
-      "secret": "${AUTH_GATEWAY_CLIENT_SECRET}",
-      "standardFlowEnabled": true,
-      "implicitFlowEnabled": false,
-      "directAccessGrantsEnabled": false,
-      "serviceAccountsEnabled": false,
-      "publicClient": false,
-      "frontchannelLogout": false,
       "protocol": "openid-connect",
-      "rootUrl": "http://localhost:8080",
-      "adminUrl": "http://localhost:8080",
-      "baseUrl": "/",
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "standardFlowEnabled": true,
       "redirectUris": [
-        "http://localhost:8080/*",
-        "http://localhost:3000/*",
-        "https://dev.beaver.com/*",
-        "https://staging.beaver.com/*"
+        "http://localhost:8000/login/oauth2/code/*"
       ],
       "webOrigins": [
-        "http://localhost:8080",
-        "http://localhost:3000",
-        "https://dev.beaver.com",
-        "https://staging.beaver.com"
-      ],
-      "bearerOnly": false,
-      "consentRequired": false,
-      "defaultClientScopes": [
-        "web-origins",
-        "profile",
-        "roles",
-        "email"
-      ],
-      "optionalClientScopes": [
-        "address",
-        "phone",
-        "offline_access",
-        "microprofile-jwt"
+        "http://localhost:8000"
       ]
     }
   ],
   "roles": {
     "realm": [
       {
-        "name": "user",
-        "description": "Standard user role",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "non-production"
+        "name": "user"
       },
       {
-        "name": "admin",
-        "description": "Administrator role",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "non-production"
+        "name": "admin"
       }
     ]
   },
@@ -87,8 +31,6 @@
       "username": "testuser",
       "enabled": true,
       "email": "test@example.com",
-      "firstName": "Test",
-      "lastName": "User",
       "credentials": [
         {
           "type": "password",
@@ -96,15 +38,12 @@
           "temporary": false
         }
       ],
-      "realmRoles": ["user"],
-      "clientRoles": {}
+      "realmRoles": ["user"]
     },
     {
       "username": "testadmin",
       "enabled": true,
       "email": "admin@example.com",
-      "firstName": "Admin",
-      "lastName": "User",
       "credentials": [
         {
           "type": "password",
@@ -112,8 +51,7 @@
           "temporary": false
         }
       ],
-      "realmRoles": ["admin", "user"],
-      "clientRoles": {}
+      "realmRoles": ["admin", "user"]
     }
   ]
 }
