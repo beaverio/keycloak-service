@@ -1,20 +1,62 @@
 {
   "realm": "non-production",
   "enabled": true,
+
   "clients": [
     {
       "clientId": "auth-gateway",
       "protocol": "openid-connect",
       "publicClient": false,
+      "serviceAccountsEnabled": true,
       "standardFlowEnabled": true,
       "directAccessGrantsEnabled": false,
-      "serviceAccountsEnabled": true,
+      "implicitFlowEnabled": false,
       "fullScopeAllowed": false,
       "redirectUris": [
-        "http://localhost:8000/login/oauth2/code/keycloak"
+        "http://localhost:8000/login/oauth2/code/keycloak",
+        "http://127.0.0.1:8000/login/oauth2/code/keycloak"
       ],
-      "webOrigins": ["http://localhost:8000"],
-      "attributes": { "pkce.code.challenge.method": "S256" }
+      "webOrigins": [
+        "http://localhost:8000",
+        "http://127.0.0.1:8000"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      }
+    }
+  ],
+
+  "roles": {
+    "realm": [
+      { "name": "owner", "description": "Full application privileges (non-prod test)" },
+      { "name": "user",  "description": "Standard application user (non-prod test)" }
+    ]
+  },
+
+  "users": [
+    {
+      "username": "owner",
+      "enabled": true,
+      "email": "owner@np.com",
+      "emailVerified": true,
+      "firstName": "Owner",
+      "lastName": "User",
+      "credentials": [
+        { "type": "password", "value": "password", "temporary": false }
+      ],
+      "realmRoles": ["owner"]
+    },
+    {
+      "username": "user",
+      "enabled": true,
+      "email": "user@np.com",
+      "emailVerified": true,
+      "firstName": "Normal",
+      "lastName": "User",
+      "credentials": [
+        { "type": "password", "value": "password", "temporary": false }
+      ],
+      "realmRoles": ["user"]
     }
   ]
 }
