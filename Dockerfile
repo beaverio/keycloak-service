@@ -5,8 +5,10 @@ ENV KC_METRICS_ENABLED=true
 ENV KC_DB=postgres
 RUN /opt/keycloak/bin/kc.sh build
 
-COPY --chown=keycloak:keycloak deployments/non-prod.json /opt/keycloak/data/import/non-prod.json
+ARG REALM_ENV=non-prod
+COPY --chown=keycloak:keycloak deployments/${REALM_ENV}.json /opt/keycloak/data/import/realm.json
 COPY --chown=keycloak:keycloak --chmod=0755 entrypoint.sh /opt/keycloak/entrypoint.sh
 
 EXPOSE 8080
+
 ENTRYPOINT ["/opt/keycloak/entrypoint.sh"]
