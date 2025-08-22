@@ -1,8 +1,3 @@
-# fly.toml app configuration file generated for keycloak-service-np on 2025-08-21T20:53:54-04:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
 app = 'keycloak-service-np'
 primary_region = 'atl'
 
