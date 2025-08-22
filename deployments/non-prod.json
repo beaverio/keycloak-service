@@ -1,0 +1,20 @@
+{
+  "realm": "non-production",
+  "enabled": true,
+  "clients": [
+    {
+      "clientId": "auth-gateway",
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "fullScopeAllowed": false,
+      "redirectUris": [
+        "http://localhost:8000/login/oauth2/code/keycloak"
+      ],
+      "webOrigins": ["http://localhost:8000"],
+      "attributes": { "pkce.code.challenge.method": "S256" }
+    }
+  ]
+}
