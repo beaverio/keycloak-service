@@ -5,6 +5,7 @@
   "clients": [
     {
       "clientId": "auth-gateway",
+      "secret": "${AUTH_GATEWAY_CLIENT_SECRET}",
       "protocol": "openid-connect",
       "publicClient": false,
       "serviceAccountsEnabled": true,
