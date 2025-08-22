@@ -1,12 +1,7 @@
-FROM quay.io/keycloak/keycloak:latest
-
-# Configure for production mode - database must be set at build time
+FROM quay.io/keycloak/keycloak:26.3.2
+ENV KC_HEALTH_ENABLED=true
+ENV KC_METRICS_ENABLED=true
 ENV KC_DB=postgres
-ENV KC_HTTP_ENABLED=true
-ENV KC_HOSTNAME_STRICT=false
-ENV KC_HOSTNAME_STRICT_HTTPS=false
-
-# Build and optimize the server configuration with PostgreSQL
 RUN /opt/keycloak/bin/kc.sh build
-
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized"]
+EXPOSE 8080
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh","start","--optimized"]
