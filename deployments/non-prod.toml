@@ -2,7 +2,7 @@ app = 'keycloak-service-np'
 primary_region = 'atl'
 
 [build]
-  dockerfile = 'Dockerfile'
+  dockerfile = '../Dockerfile'
 
 [env]
   KC_HTTP_ENABLED = 'true'
