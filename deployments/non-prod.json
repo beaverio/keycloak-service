@@ -14,47 +14,36 @@
       "implicitFlowEnabled": false,
       "fullScopeAllowed": false,
       "redirectUris": [
-        "http://localhost:8000/login/oauth2/code/auth-gateway",
-        "http://127.0.0.1:8000/login/oauth2/code/auth-gateway"
+        "http://localhost:8000/login/oauth2/code/auth-gateway"
       ],
       "webOrigins": [
-        "http://localhost:8000",
-        "http://127.0.0.1:8000"
+        "http://localhost:8000"
       ]
     }
   ],
 
-  "roles": {
-    "realm": [
-      { "name": "owner", "description": "Full application privileges (non-prod test)" },
-      { "name": "user",  "description": "Standard application user (non-prod test)" }
-    ]
-  },
-
   "users": [
     {
-      "username": "owner",
+      "username": "John",
       "enabled": true,
-      "email": "owner@np.com",
+      "email": "john@np.com",
       "emailVerified": true,
-      "firstName": "Owner",
-      "lastName": "User",
+      "firstName": "John",
+      "lastName": "Doe",
       "credentials": [
         { "type": "password", "value": "password", "temporary": false }
-      ],
-      "realmRoles": ["owner"]
+      ]
     },
     {
-      "username": "user",
+      "username": "Mary",
       "enabled": true,
-      "email": "user@np.com",
+      "email": "mary@np.com",
       "emailVerified": true,
-      "firstName": "Normal",
-      "lastName": "User",
+      "firstName": "Mary",
+      "lastName": "Smith",
       "credentials": [
         { "type": "password", "value": "password", "temporary": false }
-      ],
-      "realmRoles": ["user"]
+      ]
     }
   ]
 }
