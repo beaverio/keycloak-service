@@ -2,6 +2,14 @@
   "realm": "non-production",
   "enabled": true,
 
+  "accessTokenLifespan": 900,
+  "clientSessionIdleTimeout": 604800,
+  "clientSessionMaxLifespan": 2592000,
+  "ssoSessionIdleTimeout": 604800,
+  "ssoSessionMaxLifespan": 2592000,
+  "revokeRefreshToken": true,
+  "refreshTokenMaxReuse": 0,
+
   "clients": [
     {
       "clientId": "auth-gateway",
