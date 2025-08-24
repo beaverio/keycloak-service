@@ -69,7 +69,6 @@
         { "type": "password", "value": "password", "temporary": false }
       ]
     },
-
     {
       "username": "service-account-auth-gateway",
       "serviceAccountClientId": "auth-gateway",

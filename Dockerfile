@@ -3,6 +3,7 @@ FROM quay.io/keycloak/keycloak:26.3.2
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 ENV KC_DB=postgres
+ENV KC_FEATURES=token-exchange,admin-fine-grained-authz
 RUN /opt/keycloak/bin/kc.sh build
 
 ARG REALM_ENV=non-prod
