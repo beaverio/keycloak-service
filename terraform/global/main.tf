@@ -1,7 +1,13 @@
-module "project" {
-  source = "../modules/project"
-
-  project_name    = "keycloak-service"
-  render_api_key  = var.render_api_key
-  render_owner_id = var.render_owner_id
+resource "render_project" "keycloak_service" {
+  name = "keycloak-service"
+  environments = {
+    "non-production" = {
+      name             = "non-production"
+      protected_status = "unprotected"
+    }
+    "production" = {
+      name             = "production"
+      protected_status = "unprotected"
+    }
+  }
 }
