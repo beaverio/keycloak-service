@@ -1,0 +1,54 @@
+name: Terraform Infra
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'terraform/non-prod/**'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: "non-prod"
+        type: choice
+        options:
+          - non-prod
+          - prod
+
+jobs:
+  terraform:
+    name: Apply ${{ github.event_name == 'push' && 'non-prod' || inputs.environment }} Infra
+    runs-on: ubuntu-latest
+
+    env:
+      RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+      RENDER_OWNER_ID: ${{ secrets.RENDER_OWNER_ID }}
+
+    defaults:
+      run:
+        working-directory: ${{ github.event_name == 'push' && 'terraform/non-prod' || format('terraform/{0}', inputs.environment) }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.5
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Format
+        run: terraform fmt -check
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
