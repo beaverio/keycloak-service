@@ -9,3 +9,5 @@ override.tf
 override.tf.json
 
 *.log
+
+.env
