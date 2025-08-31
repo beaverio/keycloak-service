@@ -9,14 +9,14 @@ services:
     ports:
       - "127.0.0.1:8080:8080"
     environment:
-      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_BOOTSTRAP_ADMIN_USERNAME}
       KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD}
-      KC_DB: postgres
+      KC_DB: ${KC_DB}
       KC_DB_URL: ${KC_DB_URL}
-      KC_DB_USERNAME: admin
+      KC_DB_USERNAME: ${KC_DB_USERNAME}
       KC_DB_PASSWORD: ${KC_DB_PASSWORD}
-      KC_HTTP_ENABLED: true
-      KC_HOSTNAME: localhost
-      KC_HOSTNAME_STRICT: false
-      KC_PROXY: edge
+      KC_HTTP_ENABLED: ${KC_HTTP_ENABLED}
+      KC_HOSTNAME: ${KC_HOSTNAME}
+      KC_HOSTNAME_STRICT: ${KC_HOSTNAME_STRICT}
+      KC_PROXY: ${KC_PROXY}
     command: ["start", "--optimized"]
