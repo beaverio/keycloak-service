@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "beaver-terraform-states"
-    key    = "keycloak-service/global/terraform.tfstate"
+    key    = "keycloak-service/infrastructure/project/terraform.tfstate"
     region = "us-east-1"
   }
 }

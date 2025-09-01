@@ -2,7 +2,7 @@ resource "render_web_service" "keycloak_service_np" {
   name           = "keycloak-service-np"
   plan           = "starter"
   region         = "ohio"
-  environment_id = data.terraform_remote_state.global.outputs.non_production_environment_id
+  environment_id = data.terraform_remote_state.project.outputs.non_production_environment_id
 
   runtime_source = {
     docker = {
