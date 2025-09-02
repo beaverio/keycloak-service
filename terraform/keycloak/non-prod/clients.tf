@@ -53,6 +53,21 @@ resource "keycloak_generic_protocol_mapper" "auth_gateway_userId_mapper" {
   }
 }
 
+locals {
+  identity_service_roles = toset([
+    "view-users",
+    "manage-users",
+  ])
+}
+
+data "keycloak_role" "realm_mgmt_role" {
+  for_each = local.identity_service_roles
+
+  realm_id = keycloak_realm.non_prod.id
+  client_id = data.keycloak_openid_client.realm_mgmt_np.id
+  name     = each.key
+}
+
 resource "keycloak_openid_client" "identity_service" {
   realm_id                 = keycloak_realm.non_prod.id
   client_id                = "identity-service"
@@ -61,4 +76,13 @@ resource "keycloak_openid_client" "identity_service" {
   access_type              = "CONFIDENTIAL"
   service_accounts_enabled = true
   full_scope_allowed       = true
+}
+
+resource "keycloak_openid_client_service_account_role" "identity_service_role_binding" {
+  for_each = data.keycloak_role.realm_mgmt_role
+
+  realm_id                = keycloak_realm.non_prod.id
+  service_account_user_id = keycloak_openid_client.identity_service.service_account_user_id
+  client_id               = data.keycloak_openid_client.realm_mgmt_np.id
+  role                    = each.value.name
 }
