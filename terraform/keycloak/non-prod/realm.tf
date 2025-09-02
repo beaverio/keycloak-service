@@ -1,11 +1,11 @@
 resource "keycloak_realm" "non_prod" {
-  realm        = "non-prod"
-  display_name = "Non-Production"
-  enabled      = true
-
   lifecycle {
     prevent_destroy = true
   }
+
+  realm        = "non-prod"
+  display_name = "Non-Production"
+  enabled      = true
 
   access_code_lifespan        = "900s" // 15 min
   client_session_idle_timeout = "604800s" // 7 days

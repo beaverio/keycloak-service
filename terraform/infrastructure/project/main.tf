@@ -1,4 +1,8 @@
 resource "render_project" "keycloak_service" {
+  lifecycle {
+    prevent_destroy = true
+  }
+
   name = "keycloak-service"
   environments = {
     "non-production" = {

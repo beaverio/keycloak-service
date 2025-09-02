@@ -1,4 +1,8 @@
 resource "render_postgres" "keycloak_service_db_np" {
+  lifecycle {
+    prevent_destroy = true
+  }
+
   name           = "keycloak-service-db-np"
   plan           = "free"
   region         = "ohio"
