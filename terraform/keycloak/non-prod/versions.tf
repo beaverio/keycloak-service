@@ -8,8 +8,8 @@ terraform {
 }
 
 provider "keycloak" {
-  client_id = "admin-cli"
-  username  = "terraform-user"
-  password  = var.kc_user_password
-  url       = var.kc_url
+  realm         = "non-prod"
+  client_id     = "terraform"
+  client_secret = var.terraform_client_secret
+  url           = var.kc_base_url
 }

@@ -18,18 +18,18 @@ resource "keycloak_realm" "non_prod" {
 
 # User Profile Attributes
 resource "keycloak_realm_user_profile" "user_profile" {
-  realm_id = keycloak_realm.non_prod.id
+  realm_id                   = keycloak_realm.non_prod.id
   unmanaged_attribute_policy = "ENABLED"
 
   group {
-    name = "user-metadata"
+    name           = "user-metadata"
     display_header = "User Metadata"
   }
 
   attribute {
-    name = "username"
+    name         = "username"
     display_name = "username"
-    group = "user-metadata"
+    group        = "user-metadata"
     multi_valued = false
     permissions {
       view = ["admin", "user"]
@@ -37,10 +37,10 @@ resource "keycloak_realm_user_profile" "user_profile" {
     }
 
     validator {
-      name   = "length"
+      name = "length"
       config = {
-        min: 3
-        max: 255
+        min : 3
+        max : 255
       }
     }
     validator {
@@ -54,11 +54,11 @@ resource "keycloak_realm_user_profile" "user_profile" {
   }
 
   attribute {
-    name = "email"
-    display_name = "email"
-    group = "user-metadata"
-    multi_valued = false
-    required_for_roles  = ["user"]
+    name               = "email"
+    display_name       = "email"
+    group              = "user-metadata"
+    multi_valued       = false
+    required_for_roles = ["user"]
     permissions {
       view = ["admin", "user"]
       edit = ["admin", "user"]
@@ -68,61 +68,61 @@ resource "keycloak_realm_user_profile" "user_profile" {
       config = {}
     }
     validator {
-      name   = "length"
+      name = "length"
       config = {
-        max: 255
+        max : 255
       }
     }
   }
 
   attribute {
-    name = "firstName"
-    display_name = "firstName"
-    group = "user-metadata"
-    multi_valued = false
-    required_for_roles  = ["user"]
+    name               = "firstName"
+    display_name       = "firstName"
+    group              = "user-metadata"
+    multi_valued       = false
+    required_for_roles = ["user"]
     permissions {
       view = ["admin", "user"]
       edit = ["admin", "user"]
     }
     validator {
-      name   = "length"
+      name = "length"
       config = {
-        max: 255
+        max : 255
       }
     }
     validator {
-      name = "person-name-prohibited-characters"
+      name   = "person-name-prohibited-characters"
       config = {}
     }
   }
 
   attribute {
-    name = "lastName"
-    display_name = "lastName"
-    group = "user-metadata"
-    multi_valued = false
-    required_for_roles  = ["user"]
+    name               = "lastName"
+    display_name       = "lastName"
+    group              = "user-metadata"
+    multi_valued       = false
+    required_for_roles = ["user"]
     permissions {
       view = ["admin", "user"]
       edit = ["admin", "user"]
     }
     validator {
-      name   = "length"
+      name = "length"
       config = {
-        max: 255
+        max : 255
       }
     }
     validator {
-      name = "person-name-prohibited-characters"
+      name   = "person-name-prohibited-characters"
       config = {}
     }
   }
 
   attribute {
-    name = "userId"
+    name         = "userId"
     display_name = "userId"
-    group = "user-metadata"
+    group        = "user-metadata"
     multi_valued = false
     permissions {
       view = ["admin"]

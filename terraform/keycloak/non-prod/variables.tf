@@ -1,10 +1,10 @@
-variable "kc_user_password" {
+variable "terraform_client_secret" {
   type        = string
-  description = "Keycloak Admin-CLI User Password"
+  description = "Keycloak Terraform Client Secret"
   sensitive   = true
 }
 
-variable "kc_url" {
+variable "kc_base_url" {
   type        = string
   description = "Keycloak Instance URL"
 }
