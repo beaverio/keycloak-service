@@ -36,6 +36,22 @@ resource "keycloak_openid_client" "auth_gateway" {
     "http://localhost:8000"
   ]
 }
+resource "keycloak_generic_protocol_mapper" "auth_gateway_userId_mapper" {
+  name            = "userId"
+  protocol        = "openid-connect"
+  protocol_mapper = "oidc-usermodel-attribute-mapper"
+  realm_id        = keycloak_realm.non_prod.id
+  client_id       = keycloak_openid_client.auth_gateway.id
+  config = {
+    "user.attribute" : "userId",
+    "claim.name" : "userId",
+    "jsonType.label" : "String",
+    "multivalued" : false,
+    "id.token.claim" : true,
+    "access.token.claim": true,
+    "userinfo.token.claim" : true
+  }
+}
 
 resource "keycloak_openid_client" "identity_service" {
   realm_id                 = keycloak_realm.non_prod.id
