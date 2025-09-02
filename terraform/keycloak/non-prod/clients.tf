@@ -9,12 +9,7 @@ resource "keycloak_openid_client" "terraform" {
   name                      = "Terraform"
   access_type               = "CONFIDENTIAL"
   client_authenticator_type = "client-secret"
-
-  service_accounts_enabled                  = true
-  standard_flow_enabled                     = false
-  direct_access_grants_enabled              = false
-  implicit_flow_enabled                     = false
-  oauth2_device_authorization_grant_enabled = false
+  service_accounts_enabled  = true
 }
 
 resource "keycloak_openid_client_service_account_role" "terraform_realm_admin" {
