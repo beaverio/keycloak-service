@@ -1,3 +1,38 @@
+resource "keycloak_openid_client" "postman" {
+  realm_id                      = keycloak_realm.non_prod.id
+  client_id                     = "postman"
+  name                          = "Postman (PKCE)"
+  access_type                   = "PUBLIC"
+  standard_flow_enabled         = true
+  direct_access_grants_enabled  = false
+  pkce_code_challenge_method    = "S256"
+
+  valid_redirect_uris = [
+    "https://oauth.pstmn.io/v1/callback"
+  ]
+  web_origins         = [
+    "https://oauth.pstmn.io"
+  ]
+}
+
+resource "keycloak_generic_protocol_mapper" "postman_userId_mapper" {
+  name            = "userId"
+  protocol        = "openid-connect"
+  protocol_mapper = "oidc-usermodel-attribute-mapper"
+  realm_id        = keycloak_realm.non_prod.id
+  client_id       = keycloak_openid_client.postman.id
+  config = {
+    "user.attribute" : "userId",
+    "claim.name" : "userId",
+    "jsonType.label" : "String",
+    "multivalued" : false,
+    "id.token.claim" : true,
+    "access.token.claim" : true,
+    "userinfo.token.claim" : true
+    "introspection.token.claim" : true
+  }
+}
+
 # Application OIDC Clients
 resource "keycloak_openid_client" "auth_gateway" {
   realm_id                  = keycloak_realm.non_prod.id
