@@ -1,12 +1,14 @@
 # Application OIDC Clients
 resource "keycloak_openid_client" "auth_gateway" {
-  realm_id              = keycloak_realm.non_prod.id
-  client_id             = "auth-gateway"
-  name                  = "auth-gateway"
-  enabled               = true
-  access_type           = "CONFIDENTIAL"
-  standard_flow_enabled = true
-  full_scope_allowed    = true
+  realm_id                  = keycloak_realm.non_prod.id
+  client_id                 = "auth-gateway"
+  name                      = "auth-gateway"
+  enabled                   = true
+  access_type               = "CONFIDENTIAL"
+  client_authenticator_type = "client-secret"
+  standard_flow_enabled     = true
+  full_scope_allowed        = true
+  pkce_code_challenge_method = "S256"
 
   valid_redirect_uris = [
     "http://localhost:8000/login/oauth2/code/auth-gateway"
