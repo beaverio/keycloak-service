@@ -15,6 +15,7 @@ resource "keycloak_openid_client" "auth_gateway" {
     "http://localhost:8000"
   ]
 }
+
 resource "keycloak_generic_protocol_mapper" "auth_gateway_userId_mapper" {
   name            = "userId"
   protocol        = "openid-connect"
