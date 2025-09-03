@@ -1,9 +1,5 @@
 locals {
   clients = {
-    terraform = {
-      client_id     = keycloak_openid_client.terraform.client_id
-      client_secret = keycloak_openid_client.terraform.client_secret
-    }
     auth_gateway = {
       client_id     = keycloak_openid_client.auth_gateway.client_id
       client_secret = keycloak_openid_client.auth_gateway.client_secret

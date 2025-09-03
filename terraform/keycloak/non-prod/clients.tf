@@ -1,24 +1,3 @@
-# Terraform Service Client
-resource "keycloak_openid_client" "terraform" {
-  lifecycle {
-    prevent_destroy = true
-  }
-
-  realm_id                  = keycloak_realm.non_prod.id
-  client_id                 = "terraform"
-  name                      = "Terraform"
-  access_type               = "CONFIDENTIAL"
-  client_authenticator_type = "client-secret"
-  service_accounts_enabled  = true
-}
-
-resource "keycloak_openid_client_service_account_role" "terraform_realm_admin" {
-  realm_id                = keycloak_realm.non_prod.id
-  service_account_user_id = keycloak_openid_client.terraform.service_account_user_id
-  client_id               = data.keycloak_openid_client.realm_mgmt_np.id
-  role                    = data.keycloak_role.realm_admin_np.name
-}
-
 # Application OIDC Clients
 resource "keycloak_openid_client" "auth_gateway" {
   realm_id              = keycloak_realm.non_prod.id
@@ -48,7 +27,7 @@ resource "keycloak_generic_protocol_mapper" "auth_gateway_userId_mapper" {
     "jsonType.label" : "String",
     "multivalued" : false,
     "id.token.claim" : true,
-    "access.token.claim": true,
+    "access.token.claim" : true,
     "userinfo.token.claim" : true
     "introspection.token.claim" : true
   }
@@ -70,9 +49,9 @@ data "keycloak_role" "realm_mgmt_role" {
     "manage-users",
   ])
 
-  realm_id = keycloak_realm.non_prod.id
+  realm_id  = keycloak_realm.non_prod.id
   client_id = data.keycloak_openid_client.realm_mgmt_np.id
-  name     = each.key
+  name      = each.key
 }
 
 resource "keycloak_openid_client_service_account_role" "identity_service_role_binding" {

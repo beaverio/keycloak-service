@@ -6,7 +6,6 @@ resource "keycloak_realm" "non_prod" {
   realm        = "non-prod"
   display_name = "Non-Production"
   enabled      = true
-
   access_code_lifespan        = "900s"     // 15 min
   client_session_idle_timeout = "604800s"  // 7 days
   client_session_max_lifespan = "2592000s" // 30 days
@@ -14,6 +13,8 @@ resource "keycloak_realm" "non_prod" {
   sso_session_max_lifespan    = "2592000s" // 30 days
   revoke_refresh_token        = true
   refresh_token_max_reuse     = 0
+  registration_allowed           = true
+  registration_email_as_username = true
 }
 
 # User Profile Attributes
@@ -28,7 +29,7 @@ resource "keycloak_realm_user_profile" "user_profile" {
 
   attribute {
     name         = "username"
-    display_name = "username"
+    display_name = "Username"
     group        = "user-metadata"
     multi_valued = false
     permissions {
@@ -55,7 +56,7 @@ resource "keycloak_realm_user_profile" "user_profile" {
 
   attribute {
     name               = "email"
-    display_name       = "email"
+    display_name       = "Email"
     group              = "user-metadata"
     multi_valued       = false
     required_for_roles = ["user"]
@@ -77,7 +78,7 @@ resource "keycloak_realm_user_profile" "user_profile" {
 
   attribute {
     name               = "firstName"
-    display_name       = "firstName"
+    display_name       = "First Name"
     group              = "user-metadata"
     multi_valued       = false
     required_for_roles = ["user"]
@@ -99,7 +100,7 @@ resource "keycloak_realm_user_profile" "user_profile" {
 
   attribute {
     name               = "lastName"
-    display_name       = "lastName"
+    display_name       = "Last Name"
     group              = "user-metadata"
     multi_valued       = false
     required_for_roles = ["user"]
