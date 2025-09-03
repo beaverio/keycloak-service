@@ -1,5 +1,10 @@
 # Non-Prod Test Users
 resource "keycloak_user" "john" {
+  lifecycle {
+    ignore_changes = [attributes]
+    prevent_destroy = true
+  }
+
   realm_id       = keycloak_realm.non_prod.id
   username       = "john@np.com"
   email          = "john@np.com"
@@ -13,6 +18,11 @@ resource "keycloak_user" "john" {
 }
 
 resource "keycloak_user" "mary" {
+  lifecycle {
+    ignore_changes = [attributes]
+    prevent_destroy = true
+  }
+
   realm_id       = keycloak_realm.non_prod.id
   username       = "mary@np.com"
   email          = "mary@np.com"
