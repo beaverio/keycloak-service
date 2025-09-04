@@ -14,3 +14,9 @@ variable "kc_admin_password" {
   description = "Keycloak Admin Password"
   sensitive   = true
 }
+
+variable "test_user_password" {
+  type        = string
+  description = "Non-Prod User's Password"
+  sensitive   = true
+}

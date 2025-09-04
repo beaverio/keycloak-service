@@ -1,5 +1,9 @@
 locals {
   clients = {
+    postman = {
+      client_id     = keycloak_openid_client.postman.client_id
+      client_secret = keycloak_openid_client.postman.client_secret
+    }
     auth_gateway = {
       client_id     = keycloak_openid_client.auth_gateway.client_id
       client_secret = keycloak_openid_client.auth_gateway.client_secret

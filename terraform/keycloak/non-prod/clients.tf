@@ -2,7 +2,8 @@ resource "keycloak_openid_client" "postman" {
   realm_id                      = keycloak_realm.non_prod.id
   client_id                     = "postman"
   name                          = "Postman (PKCE)"
-  access_type                   = "PUBLIC"
+  client_authenticator_type     = "client-secret"
+  access_type                   = "CONFIDENTIAL"
   standard_flow_enabled         = true
   direct_access_grants_enabled  = false
   pkce_code_challenge_method    = "S256"

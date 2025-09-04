@@ -13,7 +13,7 @@ resource "keycloak_user" "john" {
   first_name     = "John"
   last_name      = "Doe"
   initial_password {
-    value = "password123"
+    value = var.test_user_password
   }
 }
 
@@ -31,6 +31,6 @@ resource "keycloak_user" "mary" {
   first_name     = "Mary"
   last_name      = "Smith"
   initial_password {
-    value = "password123"
+    value = var.test_user_password
   }
 }
