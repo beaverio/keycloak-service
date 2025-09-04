@@ -27,6 +27,11 @@ resource "keycloak_realm_user_profile" "user_profile" {
     display_header = "User Metadata"
   }
 
+  group {
+    name           = "application-user"
+    display_header = "Application User"
+  }
+
   attribute {
     name         = "username"
     display_name = "Username"
@@ -122,8 +127,8 @@ resource "keycloak_realm_user_profile" "user_profile" {
 
   attribute {
     name         = "userId"
-    display_name = "userId"
-    group        = "user-metadata"
+    display_name = "User ID"
+    group        = "application-user"
     multi_valued = false
     permissions {
       view = ["admin"]
@@ -133,8 +138,19 @@ resource "keycloak_realm_user_profile" "user_profile" {
 
   attribute {
     name         = "workspaceId"
-    display_name = "workspaceId"
-    group        = "user-metadata"
+    display_name = "Workspace ID"
+    group        = "application-user"
+    multi_valued = false
+    permissions {
+      view = ["admin"]
+      edit = ["admin"]
+    }
+  }
+
+  attribute {
+    name         = "role"
+    display_name = "Role"
+    group        = "application-user"
     multi_valued = false
     permissions {
       view = ["admin"]
