@@ -29,7 +29,7 @@ resource "keycloak_user" "mary" {
   enabled        = true
   email_verified = true
   first_name     = "Mary"
-  last_name      = "Smith"
+  last_name      = "Doe"
   initial_password {
     value = var.test_user_password
   }
