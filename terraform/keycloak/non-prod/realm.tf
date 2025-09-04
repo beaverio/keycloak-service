@@ -130,4 +130,15 @@ resource "keycloak_realm_user_profile" "user_profile" {
       edit = ["admin"]
     }
   }
+
+  attribute {
+    name         = "workspaceId"
+    display_name = "workspaceId"
+    group        = "user-metadata"
+    multi_valued = false
+    permissions {
+      view = ["admin"]
+      edit = ["admin"]
+    }
+  }
 }
