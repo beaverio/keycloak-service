@@ -1,30 +1,31 @@
 resource "keycloak_openid_client" "postman" {
-  realm_id                      = keycloak_realm.non_prod.id
-  client_id                     = "postman"
-  name                          = "Postman (PKCE)"
-  client_authenticator_type     = "client-secret"
-  access_type                   = "CONFIDENTIAL"
-  standard_flow_enabled         = true
-  direct_access_grants_enabled  = false
-  pkce_code_challenge_method    = "S256"
+  realm_id                     = keycloak_realm.non_prod.id
+  client_id                    = "postman"
+  name                         = "Postman (PKCE)"
+  client_authenticator_type    = "client-secret"
+  access_type                  = "CONFIDENTIAL"
+  standard_flow_enabled        = true
+  full_scope_allowed           = false
+  direct_access_grants_enabled = false
+  pkce_code_challenge_method   = "S256"
 
   valid_redirect_uris = [
     "https://oauth.pstmn.io/v1/callback"
   ]
-  web_origins         = [
+  web_origins = [
     "https://oauth.pstmn.io"
   ]
 }
 
-resource "keycloak_generic_protocol_mapper" "postman_userId_mapper" {
-  name            = "userId"
+resource "keycloak_generic_protocol_mapper" "postman_user_id_mapper" {
+  name            = "user_id"
   protocol        = "openid-connect"
   protocol_mapper = "oidc-usermodel-attribute-mapper"
   realm_id        = keycloak_realm.non_prod.id
   client_id       = keycloak_openid_client.postman.id
   config = {
-    "user.attribute" : "userId",
-    "claim.name" : "userId",
+    "user.attribute" : "user_id",
+    "claim.name" : "user_id",
     "jsonType.label" : "String",
     "multivalued" : false,
     "id.token.claim" : true,
@@ -34,15 +35,15 @@ resource "keycloak_generic_protocol_mapper" "postman_userId_mapper" {
   }
 }
 
-resource "keycloak_generic_protocol_mapper" "postman_workspaceId_mapper" {
-  name            = "workspaceId"
+resource "keycloak_generic_protocol_mapper" "postman_workspace_id_mapper" {
+  name            = "workspace_id"
   protocol        = "openid-connect"
   protocol_mapper = "oidc-usermodel-attribute-mapper"
   realm_id        = keycloak_realm.non_prod.id
   client_id       = keycloak_openid_client.postman.id
   config = {
-    "user.attribute" : "workspaceId",
-    "claim.name" : "workspaceId",
+    "user.attribute" : "workspace_id",
+    "claim.name" : "workspace_id",
     "jsonType.label" : "String",
     "multivalued" : false,
     "id.token.claim" : true,
@@ -72,14 +73,14 @@ resource "keycloak_generic_protocol_mapper" "postman_role_mapper" {
 
 # Application OIDC Clients
 resource "keycloak_openid_client" "auth_gateway" {
-  realm_id                  = keycloak_realm.non_prod.id
-  client_id                 = "auth-gateway"
-  name                      = "auth-gateway"
-  enabled                   = true
-  access_type               = "CONFIDENTIAL"
-  client_authenticator_type = "client-secret"
-  standard_flow_enabled     = true
-  full_scope_allowed        = true
+  realm_id                   = keycloak_realm.non_prod.id
+  client_id                  = "auth-gateway"
+  name                       = "auth-gateway"
+  enabled                    = true
+  access_type                = "CONFIDENTIAL"
+  client_authenticator_type  = "client-secret"
+  standard_flow_enabled      = true
+  full_scope_allowed         = false
   pkce_code_challenge_method = "S256"
 
   valid_redirect_uris = [
@@ -90,15 +91,15 @@ resource "keycloak_openid_client" "auth_gateway" {
   ]
 }
 
-resource "keycloak_generic_protocol_mapper" "auth_gateway_userId_mapper" {
-  name            = "userId"
+resource "keycloak_generic_protocol_mapper" "auth_gateway_user_id_mapper" {
+  name            = "user_id"
   protocol        = "openid-connect"
   protocol_mapper = "oidc-usermodel-attribute-mapper"
   realm_id        = keycloak_realm.non_prod.id
   client_id       = keycloak_openid_client.auth_gateway.id
   config = {
-    "user.attribute" : "userId",
-    "claim.name" : "userId",
+    "user.attribute" : "user_id",
+    "claim.name" : "user_id",
     "jsonType.label" : "String",
     "multivalued" : false,
     "id.token.claim" : true,
@@ -108,15 +109,15 @@ resource "keycloak_generic_protocol_mapper" "auth_gateway_userId_mapper" {
   }
 }
 
-resource "keycloak_generic_protocol_mapper" "auth_gateway_workspaceId_mapper" {
-  name            = "workspaceId"
+resource "keycloak_generic_protocol_mapper" "auth_gateway_workspace_id_mapper" {
+  name            = "workspace_id"
   protocol        = "openid-connect"
   protocol_mapper = "oidc-usermodel-attribute-mapper"
   realm_id        = keycloak_realm.non_prod.id
   client_id       = keycloak_openid_client.auth_gateway.id
   config = {
-    "user.attribute" : "workspaceId",
-    "claim.name" : "workspaceId",
+    "user.attribute" : "workspace_id",
+    "claim.name" : "workspace_id",
     "jsonType.label" : "String",
     "multivalued" : false,
     "id.token.claim" : true,

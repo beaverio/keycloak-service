@@ -3,16 +3,16 @@ resource "keycloak_realm" "non_prod" {
     prevent_destroy = true
   }
 
-  realm        = "non-prod"
-  display_name = "Non-Production"
-  enabled      = true
-  access_code_lifespan        = "900s"     // 15 min
-  client_session_idle_timeout = "604800s"  // 7 days
-  client_session_max_lifespan = "2592000s" // 30 days
-  sso_session_idle_timeout    = "604800s"  // 7 days
-  sso_session_max_lifespan    = "2592000s" // 30 days
-  revoke_refresh_token        = true
-  refresh_token_max_reuse     = 0
+  realm                          = "non-prod"
+  display_name                   = "Non-Production"
+  enabled                        = true
+  access_code_lifespan           = "900s"     // 15 min
+  client_session_idle_timeout    = "604800s"  // 7 days
+  client_session_max_lifespan    = "2592000s" // 30 days
+  sso_session_idle_timeout       = "604800s"  // 7 days
+  sso_session_max_lifespan       = "2592000s" // 30 days
+  revoke_refresh_token           = true
+  refresh_token_max_reuse        = 0
   registration_allowed           = true
   registration_email_as_username = true
 }
@@ -126,7 +126,7 @@ resource "keycloak_realm_user_profile" "user_profile" {
   }
 
   attribute {
-    name         = "userId"
+    name         = "user_id"
     display_name = "User ID"
     group        = "application-user"
     multi_valued = false
@@ -137,7 +137,7 @@ resource "keycloak_realm_user_profile" "user_profile" {
   }
 
   attribute {
-    name         = "workspaceId"
+    name         = "workspace_id"
     display_name = "Workspace ID"
     group        = "application-user"
     multi_valued = false
