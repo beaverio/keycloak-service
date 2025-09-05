@@ -148,13 +148,26 @@ resource "keycloak_realm_user_profile" "user_profile" {
   }
 
   attribute {
-    name         = "role"
-    display_name = "Role"
+    name         = "roles"
+    display_name = "Roles"
     group        = "application-user"
-    multi_valued = false
+    multi_valued = true
     permissions {
       view = ["admin"]
       edit = ["admin"]
+    }
+
+    validator {
+      name = "pattern"
+      config = {
+        pattern         = "^(READ|WRITE|OWNER)$"
+        "error-message" = "Each role must be one of READ, WRITE, OWNER"
+      }
+    }
+
+    annotations = {
+      inputType = "multiselect"
+      options   = "READ,WRITE,OWNER"
     }
   }
 }
