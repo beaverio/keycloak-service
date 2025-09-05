@@ -63,7 +63,7 @@ resource "keycloak_generic_protocol_mapper" "postman_roles_mapper" {
     "user.attribute" : "roles",
     "claim.name" : "roles",
     "jsonType.label" : "String",
-    "multivalued" : false,
+    "multivalued" : true,
     "id.token.claim" : true,
     "access.token.claim" : true,
     "userinfo.token.claim" : true
@@ -137,7 +137,7 @@ resource "keycloak_generic_protocol_mapper" "auth_gateway_roles_mapper" {
     "user.attribute" : "roles",
     "claim.name" : "roles",
     "jsonType.label" : "String",
-    "multivalued" : false,
+    "multivalued" : true,
     "id.token.claim" : true,
     "access.token.claim" : true,
     "userinfo.token.claim" : true
