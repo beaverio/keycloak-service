@@ -84,10 +84,11 @@ resource "keycloak_openid_client" "auth_gateway" {
   pkce_code_challenge_method = "S256"
 
   valid_redirect_uris = [
-    "http://localhost:8000/login/oauth2/code/auth-gateway"
+    "http://localhost:8000/login/oauth2/code/auth-gateway",
+    "http://localhost:8000/auth/logged-out"
   ]
   valid_post_logout_redirect_uris = [
-    "http://localhost:8000/logged-out"
+    "http://localhost:8000/auth/logged-out"
   ]
   web_origins = [
     "http://localhost:8000"
