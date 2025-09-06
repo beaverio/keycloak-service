@@ -86,6 +86,9 @@ resource "keycloak_openid_client" "auth_gateway" {
   valid_redirect_uris = [
     "http://localhost:8000/login/oauth2/code/auth-gateway"
   ]
+  valid_post_logout_redirect_uris = [
+    "http://localhost:8000/logged-out"
+  ]
   web_origins = [
     "http://localhost:8000"
   ]
