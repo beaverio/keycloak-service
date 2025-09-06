@@ -8,6 +8,7 @@ resource "keycloak_openid_client" "postman" {
   full_scope_allowed           = false
   direct_access_grants_enabled = false
   pkce_code_challenge_method   = "S256"
+  access_token_lifespan = "60"
 
   valid_redirect_uris = [
     "https://oauth.pstmn.io/v1/callback"
