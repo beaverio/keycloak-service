@@ -1,6 +1,6 @@
 resource "render_web_service" "keycloak_service_np" {
   name           = "keycloak-service-np"
-  plan           = "starter"
+  plan           = "standard"
   region         = "ohio"
   environment_id = data.terraform_remote_state.project.outputs.non_production_environment_id
 
