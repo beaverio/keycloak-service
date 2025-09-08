@@ -1,6 +1,6 @@
 resource "render_postgres" "keycloak_service_db_np" {
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   name           = "keycloak-service-db-np"
