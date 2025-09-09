@@ -7,7 +7,7 @@ resource "render_web_service" "keycloak_service_np" {
   runtime_source = {
     docker = {
       branch   = "main"
-      repo_url = "https://github.com/beaverio/keycloak-service"
+      repo_url = "https://github.com/mochafund/keycloak-service"
     }
   }
 
