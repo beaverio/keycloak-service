@@ -1,13 +1,31 @@
 version: "3.8"
 
 services:
+  keykloak-db:
+    image: postgres:17
+    container_name: keykloak-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - keykloak-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+    networks:
+      - mocha-network
+
   keycloak:
+    container_name: keycloak
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: keycloak-local
-    ports:
-      - "127.0.0.1:8080:8080"
     environment:
       KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_BOOTSTRAP_ADMIN_USERNAME}
       KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD}
@@ -19,4 +37,23 @@ services:
       KC_HOSTNAME: ${KC_HOSTNAME}
       KC_HOSTNAME_STRICT: ${KC_HOSTNAME_STRICT}
       KC_PROXY: ${KC_PROXY}
-    command: ["start", "--optimized"]
+    depends_on:
+      keykloak-db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:8080"
+    command:
+      - start
+      - --http-enabled=true
+      - --hostname=localhost
+      - --hostname-strict=false
+    restart: unless-stopped
+    networks:
+      - mocha-network
+
+volumes:
+  keykloak-db:
+
+networks:
+  mocha-network:
+    external: true
