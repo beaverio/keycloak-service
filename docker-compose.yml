@@ -6,9 +6,10 @@ services:
     command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
     depends_on:
       - keycloak
+    restart: unless-stopped
     networks:
       - mocha-network
-    restart: unless-stopped
+
   keycloak-db:
     image: postgres:17
     container_name: keycloak-db
