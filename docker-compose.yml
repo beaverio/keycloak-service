@@ -1,9 +1,17 @@
 version: "3.8"
 
 services:
-  keykloak-db:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on:
+      - keycloak
+    networks:
+      - mocha-network
+    restart: unless-stopped
+  keycloak-db:
     image: postgres:17
-    container_name: keykloak-db
+    container_name: keycloak-db
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -11,7 +19,7 @@ services:
     ports:
       - "127.0.0.1:5432:5432"
     volumes:
-      - keykloak-db:/var/lib/postgresql/data
+      - keycloak-db:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 5s
@@ -34,25 +42,24 @@ services:
       KC_DB_USERNAME: ${KC_DB_USERNAME}
       KC_DB_PASSWORD: ${KC_DB_PASSWORD}
       KC_HTTP_ENABLED: ${KC_HTTP_ENABLED}
+      KC_HOSTNAME_STRICT_HTTPS: ${KC_HOSTNAME_STRICT_HTTPS}
       KC_HOSTNAME: ${KC_HOSTNAME}
       KC_HOSTNAME_STRICT: ${KC_HOSTNAME_STRICT}
       KC_PROXY: ${KC_PROXY}
     depends_on:
-      keykloak-db:
+      keycloak-db:
         condition: service_healthy
     ports:
       - "127.0.0.1:8080:8080"
     command:
       - start
-      - --http-enabled=true
-      - --hostname=localhost
-      - --hostname-strict=false
+      - --proxy-headers=xforwarded
     restart: unless-stopped
     networks:
       - mocha-network
 
 volumes:
-  keykloak-db:
+  keycloak-db:
 
 networks:
   mocha-network:
