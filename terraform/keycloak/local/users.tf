@@ -1,16 +1,16 @@
-# Non-Prod Test Users
+# Local Test Users
 resource "keycloak_group" "test_users" {
-  realm_id = keycloak_realm.non_prod.id
+  realm_id = keycloak_realm.local.id
   name     = "test-users"
 }
 
 resource "keycloak_user" "john" {
   lifecycle {
     ignore_changes  = [attributes]
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
-  realm_id       = keycloak_realm.non_prod.id
+  realm_id       = keycloak_realm.local.id
   username       = "john@np.com"
   email          = "john@np.com"
   enabled        = true
@@ -23,7 +23,7 @@ resource "keycloak_user" "john" {
 }
 
 resource "keycloak_user_groups" "john_groups" {
-  realm_id = keycloak_realm.non_prod.id
+  realm_id = keycloak_realm.local.id
   user_id  = keycloak_user.john.id
 
   group_ids = [
@@ -34,10 +34,10 @@ resource "keycloak_user_groups" "john_groups" {
 resource "keycloak_user" "mary" {
   lifecycle {
     ignore_changes  = [attributes]
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
-  realm_id       = keycloak_realm.non_prod.id
+  realm_id       = keycloak_realm.local.id
   username       = "mary@np.com"
   email          = "mary@np.com"
   enabled        = true
@@ -50,7 +50,7 @@ resource "keycloak_user" "mary" {
 }
 
 resource "keycloak_user_groups" "mary_groups" {
-  realm_id = keycloak_realm.non_prod.id
+  realm_id = keycloak_realm.local.id
   user_id  = keycloak_user.mary.id
 
   group_ids = [

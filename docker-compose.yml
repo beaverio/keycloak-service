@@ -3,6 +3,7 @@ version: "3.8"
 services:
   cloudflared:
     image: cloudflare/cloudflared:latest
+    container_name: keycloak-cloudflared
     command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
     depends_on:
       - keycloak

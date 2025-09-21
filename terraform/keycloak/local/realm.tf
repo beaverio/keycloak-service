@@ -1,10 +1,10 @@
-resource "keycloak_realm" "non_prod" {
+resource "keycloak_realm" "local" {
   lifecycle {
     prevent_destroy = true
   }
 
-  realm                          = "non-prod"
-  display_name                   = "Non-Production"
+  realm                          = "local"
+  display_name                   = "Local"
   enabled                        = true
   access_code_lifespan           = "900s"     // 15 min
   client_session_idle_timeout    = "604800s"  // 7 days
@@ -19,7 +19,7 @@ resource "keycloak_realm" "non_prod" {
 
 # User Profile Attributes
 resource "keycloak_realm_user_profile" "user_profile" {
-  realm_id                   = keycloak_realm.non_prod.id
+  realm_id                   = keycloak_realm.local.id
   unmanaged_attribute_policy = "ENABLED"
 
   group {

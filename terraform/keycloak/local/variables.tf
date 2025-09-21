@@ -17,6 +17,6 @@ variable "kc_admin_password" {
 
 variable "test_user_password" {
   type        = string
-  description = "Non-Prod User's Password"
+  description = "Local User's Password"
   sensitive   = true
 }

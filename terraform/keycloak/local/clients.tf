@@ -1,5 +1,5 @@
 resource "keycloak_openid_client" "postman" {
-  realm_id                     = keycloak_realm.non_prod.id
+  realm_id                     = keycloak_realm.local.id
   client_id                    = "postman"
   name                         = "Postman (PKCE)"
   client_authenticator_type    = "client-secret"
@@ -22,7 +22,7 @@ resource "keycloak_generic_protocol_mapper" "postman_user_id_mapper" {
   name            = "user_id"
   protocol        = "openid-connect"
   protocol_mapper = "oidc-usermodel-attribute-mapper"
-  realm_id        = keycloak_realm.non_prod.id
+  realm_id        = keycloak_realm.local.id
   client_id       = keycloak_openid_client.postman.id
   config = {
     "user.attribute" : "user_id",
@@ -40,7 +40,7 @@ resource "keycloak_generic_protocol_mapper" "postman_workspace_id_mapper" {
   name            = "workspace_id"
   protocol        = "openid-connect"
   protocol_mapper = "oidc-usermodel-attribute-mapper"
-  realm_id        = keycloak_realm.non_prod.id
+  realm_id        = keycloak_realm.local.id
   client_id       = keycloak_openid_client.postman.id
   config = {
     "user.attribute" : "workspace_id",
@@ -58,7 +58,7 @@ resource "keycloak_generic_protocol_mapper" "postman_roles_mapper" {
   name            = "roles"
   protocol        = "openid-connect"
   protocol_mapper = "oidc-usermodel-attribute-mapper"
-  realm_id        = keycloak_realm.non_prod.id
+  realm_id        = keycloak_realm.local.id
   client_id       = keycloak_openid_client.postman.id
   config = {
     "user.attribute" : "roles",
@@ -74,7 +74,7 @@ resource "keycloak_generic_protocol_mapper" "postman_roles_mapper" {
 
 # Application OIDC Clients
 resource "keycloak_openid_client" "auth_gateway" {
-  realm_id                   = keycloak_realm.non_prod.id
+  realm_id                   = keycloak_realm.local.id
   client_id                  = "auth-gateway"
   name                       = "auth-gateway"
   enabled                    = true
@@ -100,7 +100,7 @@ resource "keycloak_generic_protocol_mapper" "auth_gateway_user_id_mapper" {
   name            = "user_id"
   protocol        = "openid-connect"
   protocol_mapper = "oidc-usermodel-attribute-mapper"
-  realm_id        = keycloak_realm.non_prod.id
+  realm_id        = keycloak_realm.local.id
   client_id       = keycloak_openid_client.auth_gateway.id
   config = {
     "user.attribute" : "user_id",
@@ -118,7 +118,7 @@ resource "keycloak_generic_protocol_mapper" "auth_gateway_workspace_id_mapper" {
   name            = "workspace_id"
   protocol        = "openid-connect"
   protocol_mapper = "oidc-usermodel-attribute-mapper"
-  realm_id        = keycloak_realm.non_prod.id
+  realm_id        = keycloak_realm.local.id
   client_id       = keycloak_openid_client.auth_gateway.id
   config = {
     "user.attribute" : "workspace_id",
@@ -136,7 +136,7 @@ resource "keycloak_generic_protocol_mapper" "auth_gateway_roles_mapper" {
   name            = "roles"
   protocol        = "openid-connect"
   protocol_mapper = "oidc-usermodel-attribute-mapper"
-  realm_id        = keycloak_realm.non_prod.id
+  realm_id        = keycloak_realm.local.id
   client_id       = keycloak_openid_client.auth_gateway.id
   config = {
     "user.attribute" : "roles",
@@ -151,7 +151,7 @@ resource "keycloak_generic_protocol_mapper" "auth_gateway_roles_mapper" {
 }
 
 resource "keycloak_openid_client" "identity_service" {
-  realm_id                 = keycloak_realm.non_prod.id
+  realm_id                 = keycloak_realm.local.id
   client_id                = "identity-service"
   name                     = "identity-service"
   enabled                  = true
@@ -166,7 +166,7 @@ data "keycloak_role" "realm_mgmt_role" {
     "manage-users",
   ])
 
-  realm_id  = keycloak_realm.non_prod.id
+  realm_id  = keycloak_realm.local.id
   client_id = data.keycloak_openid_client.realm_mgmt_np.id
   name      = each.key
 }
@@ -174,7 +174,7 @@ data "keycloak_role" "realm_mgmt_role" {
 resource "keycloak_openid_client_service_account_role" "identity_service_role_binding" {
   for_each = data.keycloak_role.realm_mgmt_role
 
-  realm_id                = keycloak_realm.non_prod.id
+  realm_id                = keycloak_realm.local.id
   service_account_user_id = keycloak_openid_client.identity_service.service_account_user_id
   client_id               = data.keycloak_openid_client.realm_mgmt_np.id
   role                    = each.value.name
